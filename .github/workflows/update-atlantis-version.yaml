@@ -1,0 +1,37 @@
+---
+
+name: Update Atlantis Version
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * *
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out repo
+        uses: actions/checkout@v2
+
+      - name: Try update Atlantis version
+        run: |
+          latest_release=$(curl -s https://api.github.com/repos/runatlantis/atlantis/releases/latest | jq '.tag_name')
+          echo "latest_release=$latest_release" >> $GITHUB_ENV
+          sed -i "s/ARG ATLANTIS_VERSION=.*/ARG ATLANTIS_VERSION=$latest_release/g" Dockerfile
+
+      - name: Check for a clean git directory
+        continue-on-error: true
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            exit 1
+          fi
+
+      - name: Create Pull Request
+        if: ${{ failure() }}
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: atlantis/${{ env.latest_release }}
+          title: atlantis ${{ env.latest_release }}
