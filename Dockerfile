@@ -44,6 +44,7 @@ RUN rm -rf \
       -name examples-1.json \
       -delete
 
+FROM python:${PYTHON_ALPINE_VERSION} as python
 # build the final image
 FROM ghcr.io/runatlantis/atlantis:v${ATLANTIS_VERSION}
 
@@ -51,3 +52,5 @@ LABEL org.opencontainers.image.source="https://github.com/rhythmictech/docker-at
 
 COPY --from=builder /usr/local/aws-cli/ /usr/local/aws-cli/
 COPY --from=builder /aws-cli-bin/ /usr/local/bin/
+COPY --from=python /usr/local/bin/ /usr/local/bin/
+COPY --from=python /usr/local/lib/ /usr/local/lib/
