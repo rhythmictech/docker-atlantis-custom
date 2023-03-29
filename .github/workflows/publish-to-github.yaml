@@ -3,7 +3,7 @@
 name: Publish Docker image to Github Container Registry
 
 env:
-  image: rhythmictech/docker-atlantis-custom
+  image: ghcr.io/rhythmictech/docker-atlantis-custom
 
 on:
   workflow_dispatch:
