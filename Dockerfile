@@ -47,5 +47,7 @@ RUN rm -rf \
 # build the final image
 FROM ghcr.io/runatlantis/atlantis:v${ATLANTIS_VERSION}
 
+LABEL org.opencontainers.image.source="https://github.com/rhythmictech/docker-atlantis-custom"
+
 COPY --from=builder /usr/local/aws-cli/ /usr/local/aws-cli/
 COPY --from=builder /aws-cli-bin/ /usr/local/bin/
