@@ -1,0 +1,33 @@
+########################################
+# pre-commit is a python-based githook manager
+# see pre-commit.com
+########################################
+---
+repos:
+
+  ########################################
+  # generic
+  ########################################
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: no-commit-to-branch
+      - id: check-added-large-files
+      - id: check-symlinks
+
+  ########################################
+  # Docker
+  ########################################
+
+  - repo: https://github.com/jas-on/pre-commit-hadolint
+    rev: 1.0.1
+    hooks:
+      - id: hadolint
+
+  -   repo: https://github.com/koalaman/shellcheck-precommit
+      rev: v0.9.0
+      hooks:
+      -   id: shellcheck
