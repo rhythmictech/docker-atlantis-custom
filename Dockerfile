@@ -1,13 +1,13 @@
 # source: https://gist.github.com/nitrocode/62505b0623cd9bf27e4b39a3f98412f5
 
 # https://github.com/runatlantis/atlantis/tags
-ARG ATLANTIS_VERSION=0.23.3
+ARG ATLANTIS_VERSION=0.27.1
 
 # https://github.com/aws/aws-cli/tags
-ARG AWS_CLI_VERSION=2.11.6
+ARG AWS_CLI_VERSION=2.15.22
 
 # https://hub.docker.com/_/python/tags?page=1&name=alpine
-ARG PYTHON_ALPINE_VERSION=3.10.10-alpine3.17
+ARG PYTHON_ALPINE_VERSION=3.13.0a4-alpine3.19
 
 # https://github.com/jqlang/jq/pkgs/container/jq
 ARG JQ_VERSION=1.7.1
