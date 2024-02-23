@@ -7,7 +7,7 @@ ARG ATLANTIS_VERSION=0.27.1
 ARG AWS_CLI_VERSION=2.15.22
 
 # https://hub.docker.com/_/python/tags?page=1&name=alpine
-ARG PYTHON_ALPINE_VERSION=3.13.0a4-alpine3.19
+ARG PYTHON_ALPINE_VERSION=3.12-alpine
 
 # https://github.com/jqlang/jq/pkgs/container/jq
 ARG JQ_VERSION=1.7.1
