@@ -9,6 +9,9 @@ ARG AWS_CLI_VERSION=2.11.6
 # https://hub.docker.com/_/python/tags?page=1&name=alpine
 ARG PYTHON_ALPINE_VERSION=3.10.10-alpine3.17
 
+# https://github.com/jqlang/jq/pkgs/container/jq
+ARG JQ_VERSION=1.7.1
+
 FROM python:${PYTHON_ALPINE_VERSION} as builder
 
 ARG AWS_CLI_VERSION
@@ -45,6 +48,7 @@ RUN rm -rf \
       -delete
 
 FROM python:${PYTHON_ALPINE_VERSION} as python
+FROM ghcr.io/jqlang/jq:${JQ_VERSION} as jq
 # build the final image
 FROM ghcr.io/runatlantis/atlantis:v${ATLANTIS_VERSION}
 
@@ -54,3 +58,4 @@ COPY --from=builder /usr/local/aws-cli/ /usr/local/aws-cli/
 COPY --from=builder /aws-cli-bin/ /usr/local/bin/
 COPY --from=python /usr/local/bin/ /usr/local/bin/
 COPY --from=python /usr/local/lib/ /usr/local/lib/
+COPY --from=jq /jq /usr/local/bin/
